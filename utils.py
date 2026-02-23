@@ -1,8 +1,10 @@
 # utils.py
+import os
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
+import matplotlib.font_manager as fm
 
 # -----------------------------
 # 라벨 매핑 (영어 → 한글)
@@ -12,12 +14,37 @@ map_play_intensity = {"Low": "낮음", "Mid": "중간", "High": "높음"}
 
 
 # -----------------------------
+# 한글 폰트 세팅 (Cloud/Linux 대응)
+# -----------------------------
+def set_korean_matplotlib_font():
+    """
+    우선순위:
+    1) 레포에 포함한 폰트 파일(Cloud에서도 100% 동일)
+    2) 윈도우 로컬: Malgun Gothic
+    3) (혹시 모를) 기본 폰트
+    """
+    # ✅ 레포에 폰트 넣었을 때 이 경로로 사용
+    font_path = os.path.join("assets", "fonts", "NanumGothic.ttf")
+
+    if os.path.exists(font_path):
+        # Cloud/Linux에서도 이 경로 폰트로 렌더링 가능
+        fm.fontManager.addfont(font_path)
+        font_name = fm.FontProperties(fname=font_path).get_name()
+        plt.rcParams["font.family"] = font_name
+    else:
+        # 로컬(윈도우)에서 폰트 파일 없으면 말굽고딕 시도
+        plt.rcParams["font.family"] = "Malgun Gothic"
+
+    # 마이너스 기호 깨짐 방지
+    plt.rcParams["axes.unicode_minus"] = False
+
+
+# -----------------------------
 # 공통 스타일 (여백 최소화 + 한글 폰트)
 # -----------------------------
 def apply_page_style():
-    # 한글 폰트(윈도우)
-    plt.rcParams["font.family"] = "Malgun Gothic"
-    plt.rcParams["axes.unicode_minus"] = False
+    # ✅ 여기서 한글 폰트 세팅 호출 (기존 Malgun Gothic 고정 제거)
+    set_korean_matplotlib_font()
 
     # Streamlit 기본 여백 줄이기 (스크롤 완화)
     st.markdown(
