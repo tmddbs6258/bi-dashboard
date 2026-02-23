@@ -33,7 +33,8 @@ c1.metric("유저 수", f"{kpi['total_users']:,}")
 c2.metric("총 매출", f"${kpi['revenue_sum']:,.0f}")
 c3.metric("과금 유저 비율", f"{kpi['payer_rate']*100:.1f}%")
 c4.metric(
-    "ARPPU(평균 / 중앙값)", f"${kpi['arppu_mean']:,.1f} / ${kpi['arppu_median']:,.1f}"
+    "ARPPU(평균 / 중앙값)",
+    f"{kpi['arppu_mean']:,.1f} USD / {kpi['arppu_median']:,.1f} USD",
 )
 
 # -----------------------------
