@@ -24,7 +24,7 @@ st.caption("몰입도(PlayIntensity) 구조를 중심으로 플레이 지표를 
 # -----------------------------
 # Above-the-fold: 표 1개 + 차트 1개
 # -----------------------------
-st.subheader("① 몰입도별 플레이 지표 요약")
+st.subheader("몰입도별 플레이 지표 요약")
 
 summary = (
     filtered.groupby("PlayIntensity")
@@ -54,25 +54,60 @@ st.dataframe(
     use_container_width=True,
 )
 
-st.subheader("② 첫 결제까지 걸린 일수 분포")
+st.subheader("첫 결제까지 걸린 일수 분포 (구간 요약, 0~30일)")
+
 fp = filtered["FirstPurchaseDaysAfterInstall"].dropna()
+
 if len(fp) == 0:
     st.info("표시할 데이터가 없습니다(결측).")
 else:
-    fig, ax = plt.subplots(figsize=(10.8, 2.6), dpi=120)
-    ax.hist(fp, bins=10)
-    ax.set_xlabel("일")
-    ax.set_ylabel("유저 수")
-    ax.set_xlim(0, 30)
-    ax.axvline(fp.mean(), linestyle="--", linewidth=1)
-    ax.axvline(fp.median(), linestyle=":", linewidth=1)
+    # 정수 일 단위 + 0~30일 제한
+    fp_days = fp.astype(int).clip(lower=0, upper=30)
+
+    # ---- 1) 균등 3구간 ----
+    bins = [-1, 10, 20, 30]
+    labels = ["0~10일", "11~20일", "21~30일"]
+
+    fp_bucket = pd.cut(fp_days, bins=bins, labels=labels)
+
+    bucket_counts = fp_bucket.value_counts().reindex(labels, fill_value=0)
+    bucket_ratio = (bucket_counts / bucket_counts.sum() * 100).round(1)
+
+    # ---- 2) 시각화 ----
+    fig, ax = plt.subplots(figsize=(8, 3), dpi=120)
+
+    ax.bar(bucket_counts.index, bucket_counts.values, width=0.4, color="#4C72B0")
+
+    ax.set_xlabel("설치 후 첫 결제까지 걸린 기간")
+    ax.set_ylabel("첫 결제 유저 수")
+
+    ax.set_ylim(0, bucket_counts.max() * 1.15)
+
     style_ax(ax)
+    ax.grid(axis="y", alpha=0.2)
+    ax.set_axisbelow(True)
+    max_val = max(bucket_counts.values)
+    ax.set_ylim(0, max_val * 1.12)
+    y_offset = max_val * 0.02
+    # 막대 위 라벨
+    for i, (cnt, pct) in enumerate(zip(bucket_counts.values, bucket_ratio.values)):
+        ax.text(
+            i,
+            cnt + y_offset,
+            f"{cnt:,}명 ({pct:.1f}%)",
+            ha="center",
+            va="bottom",
+            fontsize=9,
+            color="#333333",
+        )
+
     st.pyplot(fig, clear_figure=True)
-    st.caption(f"평균 {fp.mean():.1f}일 / 중앙값 {fp.median():.0f}일")
+
+    st.caption("0~30일을 균등하게 3구간으로 나눈 첫 결제 분포입니다.")
 
 st.markdown("###  Engagement 한 줄 요약")
 st.write(
-    "세션 길이는 몰입 구간 간 큰 차이를 보이지 않으며, 몰입 증가에 따라 세션 빈도가 뚜렷하게 증가하는 구조이며, 결제는 초기 구간부터 발생하되 후반으로 갈수록 소폭 증가하는 경향을 보입니다."
+    "세션 길이는 몰입 구간 간 큰 차이를 보이지 않으며, 몰입 증가에 따라 세션 빈도가 뚜렷하게 증가하는 구조이며, 첫 결제는 특정 시점에 집중되지 않고, 0~30일 전 구간에 고르게 분포하는 구조입니다."
 )
 
 # -----------------------------

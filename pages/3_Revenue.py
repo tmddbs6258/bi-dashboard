@@ -44,7 +44,7 @@ st.caption(
 # -----------------------------
 # Above-the-fold: 평균 vs 중앙값 2차트
 # -----------------------------
-st.subheader("① 몰입도 × 과금 수준 (평균 vs 중앙값)")
+st.subheader("몰입도 × 과금 수준 (평균 vs 중앙값)")
 
 pi_pay = (
     filtered.groupby("PlayIntensity")["InAppPurchaseAmount"]
@@ -57,9 +57,23 @@ pi_pay.index = pi_pay.index.map(map_play_intensity)
 
 left, right = st.columns(2)
 
+left, right = st.columns(2)
+
 with left:
     fig, ax = plt.subplots(figsize=(5.2, 2.6), dpi=120)
-    pi_pay["평균"].plot(kind="bar", ax=ax)
+    pi_pay["평균"].plot(kind="bar", ax=ax, color="#1F4E79")
+
+    # 🔥 막대 가운데 숫자
+    for container in ax.containers:
+        ax.bar_label(
+            container,
+            fmt="%.0f",
+            label_type="edge",  # 🔥 위에 붙임
+            padding=3,  # 막대 위에서 살짝 띄우기
+            fontsize=10,
+            color="#333333",
+        )
+
     ax.set_xlabel("")
     ax.set_ylabel("평균 결제금액($)")
     ax.tick_params(axis="x", rotation=0)
@@ -69,7 +83,19 @@ with left:
 
 with right:
     fig, ax = plt.subplots(figsize=(5.2, 2.6), dpi=120)
-    pi_pay["중앙값"].plot(kind="bar", ax=ax)
+    pi_pay["중앙값"].plot(kind="bar", ax=ax, color="#B7CFEA")
+
+    # 🔥 막대 가운데 숫자
+    for container in ax.containers:
+        ax.bar_label(
+            container,
+            fmt="%.0f",
+            label_type="edge",  # 🔥 위에 붙임
+            padding=3,  # 막대 위에서 살짝 띄우기
+            fontsize=10,
+            color="#333333",
+        )
+
     ax.set_xlabel("")
     ax.set_ylabel("중앙값 결제금액($)")
     ax.tick_params(axis="x", rotation=0)

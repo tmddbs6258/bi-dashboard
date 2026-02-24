@@ -79,11 +79,11 @@ with colL:
     )
 
 with colR:
-    st.markdown("### 2) 결제는 즉시형 + 후반 증가형 혼합")
+    st.markdown("### 2) 결제는 특정 시점 집중형이 아닌 분산 구조")
     if not np.isnan(fp_mean):
-        st.write(f"- 첫 결제는 0일부터 발생")
-        st.write(f"- 2주 전후 구간에서 소폭 증가")
-    st.success("운영: **초반 유입** 패키지 + **2주 전후** 프로모션 강화")
+        st.write(f"- 첫 결제는 0~30일 전 구간에 고르게 분포")
+        st.write(f"- 특정 시점에 집중되는 패턴은 관찰되지 않음")
+    st.success("운영: 0~30일 전반에 걸친 **지속형 프로모션 설계**")
 
 colL2, colR2 = st.columns(2)
 
@@ -121,7 +121,7 @@ with st.expander("운영 KPI", expanded=False):
     - **플랫폼별 ARPPU (iOS vs Android)**  
     → 아이폰 유저가 실제로 더 많이 쓰고 있는가?
 
-    - **첫 결제 발생률 (0~7일)**  
-    → 초반 과금 유도가 잘 되고 있는가?
+    - **세션 기반 첫 결제 전환율**  
+    → 일정 플레이 경험 이후 결제 전환이 발생하는가?
     """
     )

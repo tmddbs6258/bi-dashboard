@@ -9,7 +9,7 @@ import matplotlib.font_manager as fm
 # -----------------------------
 # 라벨 매핑 (영어 → 한글)
 # -----------------------------
-map_spending_segment = {"Minnow": "소과금", "Dolphin": "중과금", "Whale": "핵과금"}
+map_spending_segment = {"Minnow": "소과금", "Dolphin": "중과금", "Whale": "고과금"}
 map_play_intensity = {"Low": "낮음", "Mid": "중간", "High": "높음"}
 
 

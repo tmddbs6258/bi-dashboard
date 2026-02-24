@@ -53,7 +53,7 @@ with left:
     seg.index = seg.index.map(map_spending_segment)
 
     fig, ax = plt.subplots(figsize=(5.2, 2.6), dpi=120)
-    seg.plot(kind="bar", ax=ax)
+    seg.plot(kind="bar", ax=ax, color=["#C8D6EC", "#5A8BBE", "#1F4E79"])
     ax.set_ylabel("유저 수")
     ax.set_xlabel("")
     ax.tick_params(axis="x", rotation=0)
@@ -72,7 +72,7 @@ with right:
     pi.index = pi.index.map(map_play_intensity)
 
     fig, ax = plt.subplots(figsize=(5.2, 2.6), dpi=120)
-    pi.plot(kind="bar", ax=ax)
+    pi.plot(kind="bar", ax=ax, color="#2C6BAA")
     ax.set_ylabel("유저 수")
     ax.set_xlabel("")
     ax.tick_params(axis="x", rotation=0)
