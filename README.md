@@ -1,4 +1,4 @@
-# 🎮 Game User Behavior & Revenue BI Dashboard
+# Game User Behavior & Revenue BI Dashboard
 
 데이터 기반 게임 운영 의사결정을 위한  
 **게임 유저 행동 · 몰입 구조 · 과금 구조 분석 BI 프로젝트**
@@ -11,7 +11,7 @@
 
 ---
 
-# 📊 Project Goal
+# Project Goal
 
 게임 서비스 운영에서 중요한 질문
 
@@ -24,7 +24,7 @@
 
 ---
 
-# 📊 Dashboard Overview
+# Dashboard Overview
 
 분석은 3가지 관점으로 진행했습니다.
 
@@ -42,7 +42,7 @@
 
 ---
 
-# 📑 Dashboard Structure
+# Dashboard Structure
 
 ## 1️⃣ Overview
 
@@ -109,7 +109,7 @@ EDA 결과를 기반으로
 
 ---
 
-# 📊 Key Metrics
+# Key Metrics
 
 | Metric | Value |
 |------|------|
@@ -121,7 +121,7 @@ EDA 결과를 기반으로
 
 ---
 
-# 📈 Key Findings
+# Key Findings
 
 ## 1️⃣ 몰입(세션 빈도)은 매출과 강하게 연결
 
@@ -195,7 +195,7 @@ Android 유저
 
 ---
 
-# 📊 Operational KPI
+# Operational KPI
 
 게임 운영 관점에서 지속적으로 추적해야 할 KPI
 
@@ -207,7 +207,7 @@ Android 유저
 
 ---
 
-# 📂 Project Structure
+# Project Structure
 ```
 project
 │
@@ -225,7 +225,7 @@ project
 ```
 ---
 
-# 🛠 Tech Stack
+# Tech Stack
 
 - Python
 - Pandas
@@ -234,7 +234,7 @@ project
 
 ---
 
-# 📦 Dataset
+# Dataset
 
 Kaggle Mobile Game Dataset
 
@@ -247,7 +247,7 @@ Kaggle Mobile Game Dataset
 
 ---
 
-# 🚀 Dashboard
+# Dashboard
 
 Streamlit App
 
@@ -255,7 +255,7 @@ Streamlit App
 
 ---
 
-# 💡 What I Learned
+# What I Learned
 
 이 프로젝트를 통해
 
