@@ -208,6 +208,7 @@ Android 유저
 ---
 
 # 📂 Project Structure
+```
 project
 │
 ├─ data
@@ -221,7 +222,7 @@ project
 │
 ├─ app.py
 └─ README.md
-
+```
 ---
 
 # 🛠 Tech Stack
