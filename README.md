@@ -253,6 +253,9 @@ Streamlit App
 
 👉 https://bgnf9yjrhdtt8hzydapmdt.streamlit.app/
 
+# Documentation
+
+👉 https://www.notion.so/BI-302d9ef92ba280ac851dd118588862eb
 ---
 
 # What I Learned
